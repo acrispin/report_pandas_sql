@@ -3,69 +3,73 @@
 # $ pip install -r requirements2.txt
 # $ pip freeze > requirements.txt
 
-backcall
-bleach
-certifi
-chardet
-colorama
-cycler
-decorator
-entrypoints
-html5lib
-idna
-ipykernel
-ipython
-ipython-genutils
-ipywidgets
-jedi
-Jinja2
-jsonschema
+# backcall
+# bleach
+# certifi
+# chardet
+# colorama
+# cycler
+# decorator
+# entrypoints
+# html5lib
+# idna
+# ipykernel
+# ipython
+# ipython-genutils
+# ipywidgets
+# jedi
+# Jinja2
+# jsonschema
 jupyter
-jupyter-client
-jupyter-console
-jupyter-core
-kiwisolver
-lxml
-MarkupSafe
+# jupyter-client
+# jupyter-console
+# jupyter-core
+# kiwisolver
+# lxml
+# MarkupSafe
 matplotlib
-mistune
-nbconvert
-nbformat
-notebook
+# mistune
+# nbconvert
+# nbformat
+# notebook
 numpy
 pandas
 pandas-datareader
-pandocfilters
-parso
-pickleshare
-prompt-toolkit
-Pygments
+# pandocfilters
+# parso
+# pickleshare
+# prompt-toolkit
+# Pygments
 pyodbc
-pyparsing
-python-dateutil
+# pyparsing
+# python-dateutil
 python-decouple
-pytz
-pywinpty
-pyzmq
-qtconsole
+# pytz
+# pywinpty
+# pyzmq
+# qtconsole
 requests
-requests-file
-requests-ftp
-Send2Trash
-simplegeneric
-six
-terminado
-testpath
-tornado
-traitlets
-urllib3
-wcwidth
-webencodings
-widgetsnbextension
-wrapt
+# requests-file
+# requests-ftp
+# Send2Trash
+# simplegeneric
+# six
+# terminado
+# testpath
+# tornado
+# traitlets
+# urllib3
+# wcwidth
+# webencodings
+# widgetsnbextension
+# wrapt
 bokeh
 seaborn
 scipy
 
-# Documentacion
+
+### Documentacion [https://www.sphinx-doc.org/en/master/]
 # Sphinx
+
+### Dependency tree of a Python Module [https://www.geeksforgeeks.org/dependency-tree-of-a-python-module/]
+# pipdeptree
