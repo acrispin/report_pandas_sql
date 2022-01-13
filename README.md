@@ -73,13 +73,33 @@ exit()
 pip install -r requirements.txt
 ```
 
+## Run Jupiter local with virtualenv
+* https://thequickblog.com/how-to-password-protect-jupyter-notebook/
+* https://stackoverflow.com/questions/44440973/how-to-run-jupyter-notebooks-locally-with-password-and-no-token
+* https://stackoverflow.com/questions/48875436/jupyter-password-and-docker
+```sh
+# By default
+jupyter notebook
+# set specific port
+jupyter notebook --port 5000 --no-browser --ip='*'
+# without token and password, set specific port
+jupyter notebook --port 5000 --no-browser --ip='*' --NotebookApp.token='' --NotebookApp.password=''
+# with specific token, then go: http://127.0.0.1:8888/?token=123456789qwerty
+jupyter notebook --port 8888 --no-browser --ip='*' --NotebookApp.token='123456789qwerty'
+```
+
 ## Run Jupiter docker local
 ```sh
 docker build -t myjupiter:1.0.0 .
 docker rm -f myjupiter2
 docker run -it -p 8888:8888 -v /d/code/python/report_pandas_sql:/app  --name myjupiter2 myjupiter:1.0.0  
 docker run -it -p 8888:8888 --name myjupiter2 myjupiter:1.0.0
+# with flag --rm for delete container when stop
 docker run -it --rm -p 8888:8888 --name myjupiter2 myjupiter:1.0.0
+# with timezone
+docker run -it --rm -p 8888:8888 -e TZ='America/Lima' --name myjupiter2 myjupiter:1.0.0
+# with timezone and token, then go: http://127.0.0.1:8888/?token=123456789qwerty
+docker run -it --rm -p 8888:8888 -e TZ='America/Lima' -e JUPYTER_TOKEN='123456789qwerty' --name myjupiter2 myjupiter:1.0.0
 
 # Check
 docker logs -f myjupiter2
@@ -106,6 +126,10 @@ docker push acrispin/myjupiter:latest
 docker pull acrispin/myjupiter:1.0.0
 # --rm remove when stop container
 docker run -it --rm -p 8888:8888 --name myjupiter2 acrispin/myjupiter:1.0.0
+# with timezone and token, then go: http://127.0.0.1:8888/?token=123456789qwerty
+docker run -it --rm -p 8888:8888 -e TZ='America/Lima' -e JUPYTER_TOKEN='123456789qwerty' --name myjupiter2 acrispin/myjupiter:1.0.0
+# with -d daemon, then go: http://127.0.0.1:8888/?token=123456789qwerty
+docker run -it --rm -d -p 8888:8888 -e TZ='America/Lima' -e JUPYTER_TOKEN='123456789qwerty' --name myjupiter2 acrispin/myjupiter:latest
 # logs
 docker logs -f myjupiter2
 ```
