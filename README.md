@@ -90,6 +90,10 @@ docker login -u acrispin
 docker tag myjupiter:1.0.0 acrispin/myjupiter:1.0.0
 docker push acrispin/myjupiter:1.0.0
 docker logout
+
+# tag latest
+docker tag myjupiter:1.0.0 acrispin/myjupiter:latest
+docker push acrispin/myjupiter:latest
 ```
 
 ## Use custom image from dockerhub
