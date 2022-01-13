@@ -134,6 +134,8 @@ docker run -it --rm -p 8888:8888 --name myjupiter2 acrispin/myjupiter:1.1.0
 docker run -it --rm -p 8888:8888 -e TZ='America/Lima' -e JUPYTER_TOKEN='123456789qwerty' --name myjupiter2 acrispin/myjupiter:1.1.0
 # with -d daemon, then go: http://127.0.0.1:8888/?token=123456789qwerty
 docker run -it --rm -d -p 8888:8888 -e TZ='America/Lima' -e JUPYTER_TOKEN='123456789qwerty' --name myjupiter2 acrispin/myjupiter:latest
+# with only -d daemon, then go: http://127.0.0.1:5888/?token=randomtoken
+docker run -d -p 5888:8888 -e TZ='America/Lima' -e JUPYTER_TOKEN='randomtoken' --name myjupiter2 acrispin/myjupiter:latest
 # logs
 docker logs -f myjupiter2
 ```
