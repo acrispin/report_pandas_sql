@@ -1,0 +1,158 @@
+version: '3.7'
+services:
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - APP_USER=job_analytics_user
+    image: job_analytics:v1.1.0
+    container_name: job_analytics_api
+    ports:
+      - "5050:5000"
+    restart: unless-stopped
+    networks:
+      - job_analytics-network
+    volumes:
+      # - /mnt/d/DATA/job_analytics_user/logs/api:/app/logs
+      # - /home/job_analytics_user/logs/api:/app/logs
+      - /d/DATA/job_analytics_user/logs/api:/app/logs
+      - /d/DATA/job_analytics_user/temp:/app/temp
+    env_file:
+      - config/.env
+      - config/api.env
+    command: dumb-init python -m src.api
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "20m"
+        max-file: "10"
+
+  comp_financiero:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - APP_USER=job_analytics_user
+    image: job_analytics:v1.1.0
+    container_name: job_analytics_comp_financiero
+    restart: unless-stopped
+    networks:
+      - job_analytics-network
+    volumes:
+      # - /home/job_analytics_user/logs/comp_financiero:/app/logs
+      - /d/DATA/job_analytics_user/logs/comp_financiero:/app/logs
+      - /d/DATA/job_analytics_user/temp:/app/temp
+    env_file:
+      - config/.env
+      - config/comp_financiero.env
+    command: ["dumb-init", "python", "-m", "main", "--tipo=COMP_FINANCIERO"]
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "20m"
+        max-file: "10"
+
+  precio_unacem:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - APP_USER=job_analytics_user
+    image: job_analytics:v1.1.0
+    container_name: job_analytics_precio_unacem
+    restart: unless-stopped
+    networks:
+      - job_analytics-network
+    volumes:
+      # - /home/job_analytics_user/logs/precio_unacem:/app/logs
+      - /d/DATA/job_analytics_user/logs/precio_unacem:/app/logs
+      - /d/DATA/job_analytics_user/temp:/app/temp
+    env_file:
+      - config/.env
+      - config/precio_unacem.env
+    command: ["dumb-init", "python", "-m", "main", "--tipo=PRECIO_UNACEM"]
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "20m"
+        max-file: "10"
+
+  costo:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - APP_USER=job_analytics_user
+    image: job_analytics:v1.1.0
+    container_name: job_analytics_costo
+    restart: unless-stopped
+    networks:
+      - job_analytics-network
+    volumes:
+      # - /home/job_analytics_user/logs/costo:/app/logs
+      - /d/DATA/job_analytics_user/logs/costo:/app/logs
+      - /d/DATA/job_analytics_user/temp:/app/temp
+    env_file:
+      - config/.env
+      - config/costo.env
+    command: ["dumb-init", "python", "-m", "main", "--tipo=COSTO"]
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "20m"
+        max-file: "10"
+
+  proyeccion:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - APP_USER=job_analytics_user
+    image: job_analytics:v1.1.0
+    container_name: job_analytics_proyeccion
+    restart: unless-stopped
+    networks:
+      - job_analytics-network
+    volumes:
+      # - /home/job_analytics_user/logs/proyeccion:/app/logs
+      - /d/DATA/job_analytics_user/logs/proyeccion:/app/logs
+      - /d/DATA/job_analytics_user/temp:/app/temp
+    env_file:
+      - config/.env
+      - config/proyeccion.env
+    command: ["dumb-init", "python", "-m", "main", "--tipo=PROYECCION"]
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "20m"
+        max-file: "10"
+
+  test:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - APP_USER=job_analytics_user
+    image: job_analytics:v1.1.0
+    container_name: job_analytics_test
+    restart: unless-stopped
+    networks:
+      - job_analytics-network
+    volumes:
+      # - /home/job_analytics_user/logs/test:/app/logs
+      - /d/DATA/job_analytics_user/logs/test:/app/logs
+      - /d/DATA/job_analytics_user/temp:/app/temp
+    env_file:
+      - config/.env
+      - config/test.env
+    command: ["dumb-init", "python", "-m", "main", "--tipo=TEST"]
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "20m"
+        max-file: "10"
+
+networks:
+  job_analytics-network:

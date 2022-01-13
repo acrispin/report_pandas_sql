@@ -1,0 +1,3 @@
+
+class JobAnalyticsError(Exception):
+    pass
