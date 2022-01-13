@@ -90,15 +90,19 @@ jupyter notebook --port 8888 --no-browser --ip='*' --NotebookApp.token='12345678
 
 ## Run Jupiter docker local
 ```sh
+# build image
 docker build -t myjupiter:1.0.0 .
+# delete old container
 docker rm -f myjupiter2
-docker run -it -p 8888:8888 -v /d/code/python/report_pandas_sql:/app  --name myjupiter2 myjupiter:1.0.0  
+# run container
 docker run -it -p 8888:8888 --name myjupiter2 myjupiter:1.0.0
-# with flag --rm for delete container when stop
+# run container with volume -v
+docker run -it -p 8888:8888 -v /d/code/python/report_pandas_sql:/app  --name myjupiter2 myjupiter:1.0.0  
+# run container with flag --rm for delete container when stop
 docker run -it --rm -p 8888:8888 --name myjupiter2 myjupiter:1.0.0
-# with timezone
+# run container with timezone
 docker run -it --rm -p 8888:8888 -e TZ='America/Lima' --name myjupiter2 myjupiter:1.0.0
-# with timezone and token, then go: http://127.0.0.1:8888/?token=123456789qwerty
+# run container with timezone and token, then go: http://127.0.0.1:8888/?token=123456789qwerty
 docker run -it --rm -p 8888:8888 -e TZ='America/Lima' -e JUPYTER_TOKEN='123456789qwerty' --name myjupiter2 myjupiter:1.0.0
 
 # Check
@@ -109,25 +113,25 @@ docker exec -it myjupiter2 bash
 
 ## Push custom image to dockerhub
 ```sh
-docker build -t myjupiter:1.0.0 .
+docker build -t myjupiter:1.1.0 .
 docker login -u acrispin
 # docker commit myjupiter myjupiter:1.1.0 ### SI SE DESEA VERSIONAR DESDE EL CONTENEDOR myjupiter CON CAMBIOS
-docker tag myjupiter:1.0.0 acrispin/myjupiter:1.0.0
-docker push acrispin/myjupiter:1.0.0
+docker tag myjupiter:1.1.0 acrispin/myjupiter:1.1.0
+docker push acrispin/myjupiter:1.1.0
 docker logout
 
 # tag latest
-docker tag myjupiter:1.0.0 acrispin/myjupiter:latest
+docker tag myjupiter:1.1.0 acrispin/myjupiter:latest
 docker push acrispin/myjupiter:latest
 ```
 
 ## Use custom image from dockerhub
 ```sh
-docker pull acrispin/myjupiter:1.0.0
+docker pull acrispin/myjupiter:1.1.0
 # --rm remove when stop container
-docker run -it --rm -p 8888:8888 --name myjupiter2 acrispin/myjupiter:1.0.0
+docker run -it --rm -p 8888:8888 --name myjupiter2 acrispin/myjupiter:1.1.0
 # with timezone and token, then go: http://127.0.0.1:8888/?token=123456789qwerty
-docker run -it --rm -p 8888:8888 -e TZ='America/Lima' -e JUPYTER_TOKEN='123456789qwerty' --name myjupiter2 acrispin/myjupiter:1.0.0
+docker run -it --rm -p 8888:8888 -e TZ='America/Lima' -e JUPYTER_TOKEN='123456789qwerty' --name myjupiter2 acrispin/myjupiter:1.1.0
 # with -d daemon, then go: http://127.0.0.1:8888/?token=123456789qwerty
 docker run -it --rm -d -p 8888:8888 -e TZ='America/Lima' -e JUPYTER_TOKEN='123456789qwerty' --name myjupiter2 acrispin/myjupiter:latest
 # logs
