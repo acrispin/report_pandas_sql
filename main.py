@@ -13,8 +13,6 @@ if __name__ == '__main__':
     args = parser.parse_args()
     try:
         LOGGER.info(f"Tipo de job: {args.tipo}")
-        from src import job
-        job.ini(JobAnalytics[args.tipo])
     except Exception as ex:
         LOGGER.exception(ex)
     except KeyboardInterrupt as key:
