@@ -72,3 +72,31 @@ python
 exit()
 pip install -r requirements.txt
 ```
+
+## Run Jupiter docker local
+```sh
+docker build -t myjupiter:1.0.0 .
+docker rm -f myjupiter
+docker run -it -p 8888:8888 -v /d/code/python/report_pandas_sql:/app  --name myjupiter myjupiter:1.0.0  
+docker run -it -p 8888:8888 --name myjupiter myjupiter:1.0.0
+docker run -it --rm -p 8888:8888 --name myjupiter myjupiter:1.0.0
+```
+
+## Push custom image to dockerhub
+```sh
+docker build -t myjupiter:1.0.0 .
+docker login -u acrispin
+# docker commit myjupiter myjupiter:1.1.0 ### SI SE DESEA VERSIONAR DESDE EL CONTENEDOR myjupiter CON CAMBIOS
+docker tag myjupiter:1.0.0 acrispin/myjupiter:1.0.0
+docker push acrispin/myjupiter:1.0.0
+docker logout
+```
+
+## Use custom image from dockerhub
+```sh
+docker pull acrispin/myjupiter:1.0.0
+# --rm remove when stop container
+docker run -it --rm -p 8888:8888 --name myjupiter2 acrispin/myjupiter:1.0.0
+# logs
+docker logs -f myjupiter2
+```

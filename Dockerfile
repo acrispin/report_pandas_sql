@@ -1,5 +1,5 @@
-#FROM python:3.9.5 AS base
-FROM python:3.9.5
+FROM python:3.9.5 AS base
+#FROM python:3.9.5
 
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
@@ -23,17 +23,27 @@ RUN apt-get update -yqq \
     && pip install --upgrade pip
 
 
-#FROM base AS release
+FROM base AS release
 
-COPY ./requirements.txt /app/requirements.txt
-RUN pip install -r /app/requirements.txt
+COPY ./requirements-docker.txt /app/requirements.txt
+RUN pip --no-cache-dir install -r /app/requirements.txt
 
 COPY ./src/*.py /app/src/
 COPY ./main.py /app/main.py
+COPY ./base.ipynb /app/base.ipynb
 
 WORKDIR /app/
 
-ARG APP_USER=uniconjob
-RUN groupadd -r $APP_USER && useradd -r -s /bin/false -g $APP_USER $APP_USER
-RUN chown -R $APP_USER:$APP_USER /app
-USER $APP_USER
+#ARG APP_USER=uniconjob
+#RUN groupadd -r $APP_USER && useradd -r -s /bin/false -g $APP_USER $APP_USER
+#RUN chown -R $APP_USER:$APP_USER /app
+#USER $APP_USER
+
+# Make port 8888 available to the world outside this container
+EXPOSE 8888
+
+# Create mountpoint
+VOLUME /app
+
+# Run jupyter when container launches
+CMD ["jupyter", "notebook", "--ip='*'", "--port=8888", "--no-browser", "--allow-root"]
