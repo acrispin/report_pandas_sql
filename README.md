@@ -76,10 +76,15 @@ pip install -r requirements.txt
 ## Run Jupiter docker local
 ```sh
 docker build -t myjupiter:1.0.0 .
-docker rm -f myjupiter
-docker run -it -p 8888:8888 -v /d/code/python/report_pandas_sql:/app  --name myjupiter myjupiter:1.0.0  
-docker run -it -p 8888:8888 --name myjupiter myjupiter:1.0.0
-docker run -it --rm -p 8888:8888 --name myjupiter myjupiter:1.0.0
+docker rm -f myjupiter2
+docker run -it -p 8888:8888 -v /d/code/python/report_pandas_sql:/app  --name myjupiter2 myjupiter:1.0.0  
+docker run -it -p 8888:8888 --name myjupiter2 myjupiter:1.0.0
+docker run -it --rm -p 8888:8888 --name myjupiter2 myjupiter:1.0.0
+
+# Check
+docker logs -f myjupiter2
+docker logs -f --tail 100 myjupiter2
+docker exec -it myjupiter2 bash
 ```
 
 ## Push custom image to dockerhub

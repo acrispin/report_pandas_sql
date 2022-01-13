@@ -28,16 +28,17 @@ FROM base AS release
 COPY ./requirements-docker.txt /app/requirements.txt
 RUN pip --no-cache-dir install -r /app/requirements.txt
 
-COPY ./src/*.py /app/src/
-COPY ./main.py /app/main.py
+# COPY ./src/*.py /app/src/
+# COPY ./main.py /app/main.py
 COPY ./base.ipynb /app/base.ipynb
 
 WORKDIR /app/
 
-#ARG APP_USER=uniconjob
-#RUN groupadd -r $APP_USER && useradd -r -s /bin/false -g $APP_USER $APP_USER
-#RUN chown -R $APP_USER:$APP_USER /app
-#USER $APP_USER
+ARG APP_USER=jupyteruser
+RUN groupadd -r $APP_USER && useradd -m -s /bin/false -g $APP_USER $APP_USER
+RUN chown -R $APP_USER:$APP_USER /app
+USER $APP_USER
+# RUN chmod 777 -R /home/$APP_USER
 
 # Make port 8888 available to the world outside this container
 EXPOSE 8888
