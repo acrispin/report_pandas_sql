@@ -63,7 +63,9 @@ wcwidth
 webencodings
 widgetsnbextension
 wrapt
-
+bokeh
+seaborn
+scipy
 
 # Documentacion
 # Sphinx
