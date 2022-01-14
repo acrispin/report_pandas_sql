@@ -19,3 +19,14 @@ scipy
 
 ### Dependency tree of a Python Module [https://www.geeksforgeeks.org/dependency-tree-of-a-python-module/]
 # pipdeptree
+
+### pip-autoremove [https://pypi.org/project/pip-autoremove/]
+# pip install pip-autoremove==0.9.1
+# pip-autoremove -l
+# pip-autoremove jupyter -y
+# pip uninstall pip-autoremove -y
+
+### uninstall all [https://stackoverflow.com/questions/11248073/what-is-the-easiest-way-to-remove-all-packages-installed-by-pip]
+# pip freeze | xargs pip uninstall -y
+# pip uninstall -r requirements.txt -y
+# pip uninstall -y -r <(pip freeze)
