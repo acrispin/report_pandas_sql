@@ -23,7 +23,11 @@ RUN apt-get install -y dumb-init \
 #    && apt-get install -y --no-install-recommends openssl \
 #    && sed -i 's,^\(MinProtocol[ ]*=\).*,\1'TLSv1',g' /etc/ssl/openssl.cnf \
 #    && sed -i 's,^\(CipherString[ ]*=\).*,\1'DEFAULT@SECLEVEL=1',g' /etc/ssl/openssl.cnf \
-#    && rm -rf /var/lib/apt/lists/* \
+#    && rm -rf /var/lib/apt/lists/*
+
+# FIX SSL Provider https://stackoverflow.com/questions/65123031/odbc-driver-17-for-sql-serverssl-provider-error1425f102ssl-routinesssl-ch/66458665#66458665
+RUN sed -i 's,^\(MinProtocol[ ]*=\).*,\1'TLSv1.0',g' /etc/ssl/openssl.cnf \
+    && sed -i 's,^\(CipherString[ ]*=\).*,\1'DEFAULT@SECLEVEL=1',g' /etc/ssl/openssl.cnf
 
 # FIX CVE-2022-2509, CVE-2021-46828
 RUN apt-get update -y && apt-get --only-upgrade install libgnutls30 libtirpc3 libtirpc-common -y
