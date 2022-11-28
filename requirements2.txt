@@ -13,6 +13,9 @@ bokeh
 seaborn
 scipy
 
+### Para linux/docker eliminar los siguientes paquetes
+# pywin32
+# pywinpty
 
 ### Documentacion [https://www.sphinx-doc.org/en/master/]
 # Sphinx

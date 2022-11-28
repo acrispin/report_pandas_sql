@@ -95,5 +95,3 @@ websocket-client==1.4.2
 widgetsnbextension==4.0.3
 xyzservices==2022.9.0
 zipp==3.11.0
-# pywin32==303 ### only for windows
-# pywinpty==1.1.6 ### only for windows
