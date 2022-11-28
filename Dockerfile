@@ -17,13 +17,13 @@ RUN apt-get update -y && apt-get install -y gnupg curl \
 RUN apt-get install -y dumb-init \
     && apt-get install unixodbc-dev -y \
     && apt-get install libgssapi-krb5-2 -y \
-    && apt-get install g++ -y
+    && apt-get install g++ -y \
+
 #RUN apt-get update -yqq \
 #    && apt-get install -y --no-install-recommends openssl \
 #    && sed -i 's,^\(MinProtocol[ ]*=\).*,\1'TLSv1',g' /etc/ssl/openssl.cnf \
 #    && sed -i 's,^\(CipherString[ ]*=\).*,\1'DEFAULT@SECLEVEL=1',g' /etc/ssl/openssl.cnf \
 #    && rm -rf /var/lib/apt/lists/* \
-#    && pip install --upgrade pip
 
 # FIX CVE-2022-2509, CVE-2021-46828
 RUN apt-get update -y && apt-get --only-upgrade install libgnutls30 libtirpc3 libtirpc-common -y
