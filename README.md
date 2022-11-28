@@ -111,7 +111,7 @@ docker logs -f --tail 100 myjupiter2
 docker exec -it myjupiter2 bash
 ```
 
-## Push custom image to dockerhub
+## Push custom image to dockerhub, pull image
 ```sh
 docker build -t myjupiter:1.1.0 .
 docker login -u acrispin
@@ -123,15 +123,18 @@ docker logout
 # tag latest
 docker tag myjupiter:1.1.0 acrispin/myjupiter:latest
 docker push acrispin/myjupiter:latest
+
+# pull image
+docker pull acrispin/myjupiter:latest
 ```
 
 ## Use custom image from dockerhub
 ```sh
-docker pull acrispin/myjupiter:1.1.0
+docker pull acrispin/myjupiter:latest
 # --rm remove when stop container
-docker run -it --rm -p 8888:8888 --name myjupiter2 acrispin/myjupiter:1.1.0
+docker run -it --rm -p 8888:8888 --name myjupiter2 acrispin/myjupiter:latest
 # with timezone and token, then go: http://127.0.0.1:8888/?token=123456789qwerty
-docker run -it --rm -p 8888:8888 -e TZ='America/Lima' -e JUPYTER_TOKEN='123456789qwerty' --name myjupiter2 acrispin/myjupiter:1.1.0
+docker run -it --rm -p 8888:8888 -e TZ='America/Lima' -e JUPYTER_TOKEN='123456789qwerty' --name myjupiter2 acrispin/myjupiter:latest
 # with -d daemon, then go: http://127.0.0.1:8888/?token=123456789qwerty
 docker run -it --rm -d -p 8888:8888 -e TZ='America/Lima' -e JUPYTER_TOKEN='123456789qwerty' --name myjupiter2 acrispin/myjupiter:latest
 # with only -d daemon, then go: http://127.0.0.1:5888/?token=randomtoken
