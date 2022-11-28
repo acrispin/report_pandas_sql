@@ -1,6 +1,6 @@
 
 # Version Python
-* python 3.9.5
+* python 3.11.0
 
 ## Utils
 * https://code.visualstudio.com/docs/python/debugging
