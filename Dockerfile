@@ -17,7 +17,7 @@ RUN apt-get update -y && apt-get install -y gnupg curl \
 RUN apt-get install -y dumb-init \
     && apt-get install unixodbc-dev -y \
     && apt-get install libgssapi-krb5-2 -y \
-    && apt-get install g++ -y \
+    && apt-get install g++ -y
 
 #RUN apt-get update -yqq \
 #    && apt-get install -y --no-install-recommends openssl \
