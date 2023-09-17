@@ -2,6 +2,7 @@
 ## Documenting Python Code: A Complete Guide
 https://realpython.com/documenting-python-code/
 https://www.sphinx-doc.org/en/master/
+https://matplotlib.org/sampledoc/getting_started.html
 https://github.com/matplotlib/sampledoc/blob/master/getting_started.rst
 https://github.com/acrispin/job_despachos
 
